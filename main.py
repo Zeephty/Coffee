@@ -1,14 +1,15 @@
 import sys
 from PyQt6.QtWidgets import QMainWindow, QApplication, QTableWidgetItem
 import sqlite3
-from PyQt6 import uic
+import mainForm
+import addEditForm
 
 
-class AddEditCoffeeForm(QMainWindow):
+class AddEditCoffeeForm(QMainWindow, addEditForm.Ui_MainWindow):
     def __init__(self, parent, index=None):
         super().__init__()
 
-        uic.loadUi("addEditCoffeeForm.ui", self)
+        self.setupUi(self)
 
         self.par = parent
         self.coffee_id = index
@@ -78,11 +79,11 @@ class AddEditCoffeeForm(QMainWindow):
             return False
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, mainForm.Ui_MainWindow):
     def __init__(self):
         super().__init__()
 
-        uic.loadUi("main.ui", self)
+        self.setupUi(self)
 
         self.con = sqlite3.connect("coffee.sqlite")
         self.cur = self.con.cursor()
